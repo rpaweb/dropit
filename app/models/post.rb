@@ -6,6 +6,18 @@ class Post < ApplicationRecord
 
   validates :title, :description,   presence: true
 
+  validate :image_validation
+
+  def image_validation
+    if image.attached?
+      if image.blob.byte_size > 1000000
+        errors[:base] << 'Too big'
+      elsif !image.blob.content_type.starts_with?('image/')
+        errors[:base] << 'Wrong format'
+      end
+    end
+  end
+
   # Parameterize the Posts' URL for SEO purposes.
   def to_param
     [id, title.parameterize].join("-")

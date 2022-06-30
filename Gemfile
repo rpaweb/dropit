@@ -26,7 +26,6 @@ gem 'omniauth-google-oauth2'                                        # OAuth w Go
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]               # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'rspec-rails', '~> 5.0.0'
 end
 
 group :development do

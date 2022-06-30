@@ -1,18 +1,27 @@
 <% content_for(:title) { "#{@profile.name} #{@profile.lastname}" } %>
 
-<br>
+<div class="container text-center" style="margin-top:100px;width:30%">
+  <h1>Profile</h1>
+  <div class="row p-5 bg-light">
+    <div class="col-md-12">
+      <%= image_tag @profile.avatar, style: "width:100%;" if @profile.avatar.attached? %>
+      <h4 class="text-center"><%= "#{@profile.name} #{@profile.lastname}" %></h4>
+    </div>
+    <div class="col-md-6 border text-center">Following</div>
+    <div class="col-md-6 border text-center"><%= link_to @profile.user.following.count, "#", "data-bs-toggle" => "modal", 'data-bs-target' => "#followingModal" %></div>
+    <div class="col-md-6 border text-center">Followers</div>
+    <div class="col-md-6 border text-center"><%= link_to @profile.user.followers.count, "#", "data-bs-toggle" => "modal", 'data-bs-target' => "#followersModal" %></div>
+    <div class="col-md-6 border text-center">Posts</div>
+    <div class="col-md-6 border text-center"><%= @profile.user.posts.count %></div>
+    <div class="col-md-6 border text-center">Comments</div>
+    <div class="col-md-6 border text-center"><%= @profile.user.comments.count %></div>
+    <div class="d-grid gap-2" style="margin-top:2vh;">
+      <%= render 'follow_form' %>
+    </div>
+  </div>
+</div>
 
-<%= image_tag @profile.avatar if @profile.avatar.attached? %>
 
-<br>
-
-<strong><%= "#{@profile.name} #{@profile.lastname}" %></strong>
-
-<br>
-
-<strong>Following: </strong><%= link_to @profile.user.following.count, "#", "data-bs-toggle" => "modal", 'data-bs-target' => "#followingModal" %> ||
-<strong>Followers: </strong><%= link_to @profile.user.followers.count, "#", "data-bs-toggle" => "modal", "data-bs-target" => "#followersModal" %> ||
-<%= render 'follow_form' %>
 
 <!-- Following Modal -->
 <div class="modal fade" id="followingModal" tabindex="-1" aria-labelledby="followingModalLabel" aria-hidden="true">

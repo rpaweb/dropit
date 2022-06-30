@@ -1,11 +1,11 @@
 <%= form_tag upload_posts_path, multipart: true do %>
   <div class="field">
-    <%= label_tag :file %>
-    <%= file_field_tag :file %>
+    <%= label_tag :file, "Upload a CSV with the posts information on it." %>
+    <%= file_field_tag :file, class: "form-control form-control-lg", id: "formFileLg" %>
   </div>
 
-  <div class="actions">
-    <%= submit_tag %>
+  <div class="actions" style="margin-top:30px;">
+    <%= submit_tag "Bulk upload", class: "btn btn-lg btn-dark" %>
   </div>
 <% end %>
   

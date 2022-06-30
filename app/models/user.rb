@@ -16,6 +16,8 @@ class User < ApplicationRecord
   has_many    :posts,     dependent: :destroy
   has_many    :comments,  dependent: :destroy
 
+  validates   :email, presence: true
+
   # Follows a user
   def follow(other_user)
     given_follows.create(followed_id: other_user.id)

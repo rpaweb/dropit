@@ -1,7 +1,10 @@
 <% content_for(:title) { 'Bulk upload' } %>
 
-<h1>Bulk upload</h1>
+<div class="container bg-light" style="margin-top:100px;width:50%">
+  <div class="p-5 text-center">
+    <h1>Bulk upload</h1>
+    <%= render 'bulk_form', post: @post %>
+  </div>
+</div>
 
-<%= render 'bulk_form', post: @post %>
-
-<%= link_to 'Back', posts_path %>
+<%= content_tag :div, (link_to 'Back', posts_path), class: "text-center" %>

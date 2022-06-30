@@ -11,13 +11,12 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_field :description %>
+  <div class="mb-3">
+    <%= form.text_area :description, placeholder: "Comment", class: "form-control form-control-lg" %>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class="actions" style="margin-top:30px;">
+    <%= form.submit "Post comment", class: "btn btn-lg btn-dark" %>
   </div>
 <% end %>
   
