@@ -1,0 +1,80 @@
+<% content_for(:title) { "View post" } %>
+
+<div class="container bg-light" style="margin-top:100px;">
+  <div class="row">
+    <div class="col-md-5 border p-5">
+      <h4 class="text-center"><b><%= @post.title %></b></h4>
+      <%= image_tag @post.image, class: "", style: "width:100%" if @post.image.attached? %>
+      <h4 style="margin-top:25px;"><span class="badge bg-secondary" style="width:100%;">Contenido</span></h4>
+      <p><%= @post.description %></p>
+    </div>
+    <div class="col-md-7 border p-5">
+      <h4><span class="badge bg-secondary" style="width:100%;">Comentarios</span></h4>
+      <div class="border" style="max-height:350px;overflow-y:scroll;overflow-x:hidden">
+        <% @post.comments.order(created_at: :desc).each do |comment| %>
+          <%= content_tag :div, class: "border" do %>
+            <div class="row">
+              <div class="col-md-2">
+                <%= image_tag comment.user.profile.avatar, class: "img-thumbnail", style: "width:100%" %>
+              </div>
+              <div class="col-md-10">
+                <div style="margin-top:10px;">
+                  <h6><strong><%= "#{comment.user.profile.name} #{comment.user.profile.lastname}" %></strong></h6>
+                  <p><%= comment.description %></p>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="text-center" style="margin-top:35px;">
+        <%= link_to 'Back', posts_path, class: "btn btn-dark" %>
+        <%= link_to "Make a comment!", new_post_comment_path(@post), class: "btn btn-dark" %>
+        <%= link_to "About this post", "#", "data-bs-toggle" => "modal", 'data-bs-target' => "#postInfoModal", class: "btn btn-dark" %>
+        <%= link_to "Seen by", "#", "data-bs-toggle" => "modal", 'data-bs-target' => "#seenByModal", class: "btn btn-dark" if @post.user == current_user %>
+        <div class="btn-group" role="group">
+          <%= link_to 'Edit', edit_post_path(@post), class: "btn btn-dark" if @post.user == current_user %>
+          <%= link_to 'Delete', post_path(@post), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" if @post.user == current_user %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Post Info Modal -->
+<div class="modal fade" id="postInfoModal" tabindex="-1" aria-labelledby="postInfoModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="postInfoModalLabel">About this post</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <ul>
+          <li>Created date: <%= @post.created_at.strftime("%c") %></li>
+          <li>Last modified: <%= @post.updated_at.strftime("%c") %></li>
+          <li>Author: <%= link_to "#{@post.user.profile.name} #{@post.user.profile.lastname}", profile_path(@post.user) %></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Seen By Modal -->
+<div class="modal fade" id="seenByModal" tabindex="-1" aria-labelledby="seenByModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="seenByModalLabel">People who saw this post</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <ul>
+          <% @seen_by.each do |watcher| %>
+            <li><%= "#{watcher.profile.name} #{watcher.profile.lastname}" %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+<%= form_tag upload_posts_path, multipart: true do %>
+  <div class="field">
+    <%= label_tag :file %>
+    <%= file_field_tag :file %>
+  </div>
+
+  <div class="actions">
+    <%= submit_tag %>
+  </div>
+<% end %>
+  

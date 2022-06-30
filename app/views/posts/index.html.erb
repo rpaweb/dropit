@@ -1,0 +1,32 @@
+<section class="blogTiles">
+  <div class="container">
+    <div>
+      <h2>Drop<span>It</span>!</h2>
+      <div class="row">
+
+        <% @posts.each do |post| %>
+          <%= content_tag :div, class: "col-sm-#{post == @posts.first ? '8' : '4'} col-md-#{post == @posts.first ? '6' : '3'}" do %>
+            <%= link_to post, class: "#{post == @posts.first ? 'black tile' : 'tile'}" do %>
+              <%= content_tag :div, class: "tileImage#{post == @posts.first ? 'First' : nil}" do %>
+                <%= image_tag post.image.attached? ? post.image : "https://youspeak.com.es/wp-content/themes/juiced/img/thumbnail-default.jpg", class: "img-responsive img-fluid" %>
+              <% end %>
+              <%= content_tag :div, class: "tileContent#{post == @posts.first ? 'First' : nil}" do %>
+                <h3><%= post.title %></h3>
+                <p><%= post.description %></p>
+              <% end %>
+              <%= content_tag :div, class: "tileOverlay" do %>
+                <span>Read More</span>
+              <% end %>
+            <% end %>
+          <% end %>
+        <% end %>
+        <%= content_tag :div, class: "col-sm-#{12-((@posts.empty? ? 0 : @posts.size+1)%3*4)} col-md-#{12-((@posts.empty? ? 0 : @posts.size+1)%4*3)}" do %>
+          <%= link_to "#", class: "tileLast" do %>
+            <span>“Always pass on what you have learned.”</span>
+          <% end %>
+        <% end %>
+
+      </div>
+    </div>
+  </div>
+</section>

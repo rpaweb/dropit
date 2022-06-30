@@ -1,0 +1,229 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+ // Variables
+
+$white: #fff;
+$gray: #333;
+$black: #000;
+$accent: #f66;
+
+$commonBorderRadius: 4px;
+
+// Mixins
+
+@mixin transition($time, $type, $selector) {
+	-webkit-transition: $time $type $selector;
+	-moz-transition: $time $type $selector;
+	-o-transition: $time $type $selector;
+	transition: $time $type $selector;
+}
+
+@mixin transitionDelay($time) {
+	-webkit-transition-delay: $time;
+	transition-delay: $time;
+}
+
+.blogTiles {
+	padding-bottom: 50px;
+	background: url("") no-repeat fixed center center;
+	background-size: 100% auto;
+	background-color: $white;
+	h2 {
+		text-align: center;
+		margin-bottom: 30px;
+		font-size: 44px;
+		margin-top: 70px;
+		span {
+			color: $accent;
+			font-weight: bold;
+		}
+	}
+	.tile {
+		background: $white;
+		border-radius: $commonBorderRadius;
+		overflow: hidden;
+		height: 400px;
+		margin-bottom: 20px;
+		display: block;
+		color: inherit;
+		text-decoration: none;
+		position: relative;
+		&:hover {
+			h3 {
+				color: $accent;
+			}
+			.tileOverlay {
+				height: 400px;
+				width: 100%;
+				color: $gray;
+				background-color: $accent;
+				position: absolute;
+				top: 0;
+				opacity: 0.95;
+				@include transition(0.4s, ease-out, all);
+				@include transitionDelay(0s);
+			}
+		}
+	}
+	.black {
+		background: $accent;
+	}
+	.tile {
+		.tileImageFirst {
+			display: inline-block;
+			width: 50%;
+			overflow: hidden;
+			height: 100%;
+			img {
+				height: 100%;
+				width: auto;
+			}
+		}
+		.tileContentFirst {
+			display: inline-block;
+			vertical-align: top;
+			width: 49%;
+			padding: 0 10px;
+			h3 {
+				font-weight: bold;
+				color: $white;
+				text-transform: uppercase;
+				font-size: 30px;
+			}
+			p {
+				color: $white;
+				font-size: 16px;
+			}
+		}
+		.tileContent {
+			padding: 0 10px;
+			h3 {
+				font-weight: bold;
+				font-size: 20px;
+				text-transform: uppercase;
+			}
+		}
+		.tileImage {
+			overflow: hidden;
+			max-height: 180px;
+		}
+	}
+}
+
+.tileOverlay {
+	height: 400px;
+	width: 0%;
+	color: $gray;
+	background-color: $accent;
+	position: absolute;
+	top: 0;
+	opacity: 0.0;
+	@include transition(0.4s, ease-out, all);
+	@include transitionDelay(0s);
+	text-align: center;
+	padding-top: 180px;
+	span {
+		text-align: center;
+		max-height: 400px;
+		border: 2px solid $white;
+		display: inline-block;
+		padding: 10px 30px;
+		border-radius: $commonBorderRadius;
+		color: $white;
+		font-weight: bold;
+		font-size: 16px;
+	}
+}
+
+.blogTiles .tileLast {
+	background: $accent;
+	height: 400px;
+	width: 100%;
+	display: inline-block;
+	padding: 20px;
+	text-decoration: none;
+	border-radius: $commonBorderRadius;
+	span {
+		color: $white;
+		font-weight: bold;
+		text-transform: uppercase;
+		font-size: 25px;
+		line-height: 26px;
+	}
+}
+
+@media (max-width: 768px) {
+	.blogTiles {
+		h2 {
+			text-align: center;
+			font-weight: bold;
+			margin-bottom: 30px;
+			font-size: 34px;
+			margin-top: 70px;
+		}
+		.tile {
+			background: $white;
+			border-radius: $commonBorderRadius;
+			overflow: hidden;
+			height: inherit;
+			margin-bottom: 20px;
+			display: block;
+			color: inherit;
+			text-decoration: none;
+			position: relative;
+			.tileImageFirst {
+				display: inline-block;
+				width: 100%;
+				overflow: hidden;
+				height: auto;
+				img {
+					height: auto;
+					width: 100%;
+				}
+			}
+		}
+		.black {
+			background: $white;
+		}
+		.tile .tileContentFirst {
+			display: inline-block;
+			vertical-align: top;
+			width: 100%;
+			padding: 0 10px;
+			h3 {
+				font-weight: bold;
+				color: $gray;
+				text-transform: uppercase;
+				font-size: 20px;
+			}
+			p {
+				color: $gray;
+				font-size: 14px;
+				font-weight: 400;
+			}
+		}
+		.tileLast {
+			background: $accent;
+			height: 100%;
+			width: 100%;
+			display: inline-block;
+			padding: 20px;
+			text-decoration: none;
+			border-radius: $commonBorderRadius;
+		}
+	}
+}

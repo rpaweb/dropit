@@ -1,0 +1,53 @@
+<% content_for(:title) { "#{@profile.name} #{@profile.lastname}" } %>
+
+<br>
+
+<%= image_tag @profile.avatar if @profile.avatar.attached? %>
+
+<br>
+
+<strong><%= "#{@profile.name} #{@profile.lastname}" %></strong>
+
+<br>
+
+<strong>Following: </strong><%= link_to @profile.user.following.count, "#", "data-bs-toggle" => "modal", 'data-bs-target' => "#followingModal" %> ||
+<strong>Followers: </strong><%= link_to @profile.user.followers.count, "#", "data-bs-toggle" => "modal", "data-bs-target" => "#followersModal" %> ||
+<%= render 'follow_form' %>
+
+<!-- Following Modal -->
+<div class="modal fade" id="followingModal" tabindex="-1" aria-labelledby="followingModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="followingModalLabel">Following</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <ul>
+          <% @profile.user.following.each do |f| %>
+            <li><%= link_to "#{f.profile.name} #{f.profile.lastname}", profile_path(f.profile) %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Followers Modal -->
+<div class="modal fade" id="followersModal" tabindex="-1" aria-labelledby="followersModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="followersModalLabel">Followers</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <ul>
+          <% @profile.user.followers.each do |f| %>
+            <li><%= link_to "#{f.profile.name} #{f.profile.lastname}", profile_path(f.profile) %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

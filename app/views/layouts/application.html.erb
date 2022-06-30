@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for?(:title) ? "(#{yield(:title)})" : nil %> Drop It | AGS Ruby Test by Rafael Peña-Azar</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+
+    <%= render "layouts/nav" %>
+    <%= render "layouts/carousel" unless current_user %>
+    
+    <%= yield %>
+    <%= toastr_flash %>
+
+  </body>
+</html>
