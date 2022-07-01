@@ -1,24 +1,7 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Step by step to initiate with the DropIt app.
+1. "bundle", to make the correct installation of all the gems.
+2. "rails db:migrate", to run all the migrations.
+3. You'll need to google credentials to make a correct run of the Google SSO (Omniauth). Make a ".env" file and associate the variables "GOOGLE_OAUTH_CLIENT_ID" and "GOOGLE_OAUTH_CLIENT_SECRET" to credentials of your own.
+4. Have fun posting, importing multiple posts, following people, and more.
